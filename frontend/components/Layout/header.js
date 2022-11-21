@@ -8,7 +8,9 @@ export class Header extends Component {
   template() {
     const isLogin = !!localStorage.getItem("role");
     const isAdmin = localStorage.getItem("role") === "admin";
-    const cartCount = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : 0;
+    const cartCount = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart")).length
+      : 0;
     return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
@@ -42,14 +44,14 @@ export class Header extends Component {
                 </div>
               </div>
               <div class="header-nav-btn">
-                  <a href="javascript:;" id="btn-nav-open">MENU ></a>
+                  <span id="btn-nav-open">MENU ></span>
               </div>
             </div>
             <nav id="side-nav" class="side-nav">
               <div class="nav-inner">
                 <div class="nav-header">
                   <a href="/" class="header-logo">UnknownBox</a>
-                  <a href="javascript:void(0);" id="side-nav-close">메뉴닫기</a>
+                  <span id="side-nav-close">메뉴닫기</span>
                 </div>
                 <ul class="">
                 <span class="main-nav-title">카테고리</span>
@@ -90,17 +92,17 @@ export class Header extends Component {
   }
 
   mounted() {
-   if(getMain()){
-    getMain().then(result => {
-      result.categories.map(x => {
-        qs("#side-menu").innerHTML += `
+    if (getMain()) {
+      getMain().then(result => {
+        result.categories.map(x => {
+          qs("#side-menu").innerHTML += `
                       <div class="depth2">
                         <a href="/rank?cate=${x.categoryId}">${x.categoryName}</a>
                       </div>
                     `;
+        });
       });
-    });
-   }
+    }
   }
 }
 
