@@ -2,6 +2,7 @@ import { qs } from "./utils/index.js";
 import routes from "./router/index.js";
 import { Header } from "./components/Layout/header.js";
 import { Footer } from "./components/Layout/footer.js";
+import { BASE_URL } from "./constants/url.js";
 
 const navigateTo = url => {
   window.history.pushState(null, null, url);
@@ -53,16 +54,19 @@ const App = async () => {
   new Footer(qs("#footer"));
 };
 
+window.addEventListener("popstate", App);
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("cart")) {
     localStorage.setItem("cart", JSON.stringify([]));
   }
 
   document.body.addEventListener("click", e => {
-    if (e.target.matches("[data-link]")) {
-      e.preventDefault();
-      navigateTo(e.target.href);
-    }
+    const target = e.target.closest("a");
+    if (!(target instanceof HTMLAnchorElement)) return;
+    e.preventDefault();
+    const targetURL = target.href.replace(BASE_URL, "");
+    navigateTo(targetURL);
   });
 
   App();

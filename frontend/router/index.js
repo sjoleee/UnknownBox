@@ -33,7 +33,7 @@ const routes = [
   { path: "/order/payment", view: Payment, isPublic: false },
   { path: "/order/recipt", view: Recipt, isPublic: false },
   { path: "/qnaboard/:mode", view: QnaBoard, isPublic: true },
-  { path: "/rank", view: Rank },
+  { path: "/rank", view: Rank, isPublic: true },
   { path: "/admin", view: Admin, isPublic: false, isAdmin: true },
   {
     path: "/admin/randombox",
