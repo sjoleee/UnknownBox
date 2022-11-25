@@ -72,6 +72,16 @@ export function validateEmail(email) {
   return true;
 }
 
+export function validateEmailVerified(isEmailConfirmVerified, targetInput) {
+  if (!isEmailConfirmVerified) {
+    new Toast("이메일을 인증해주세요.");
+    targetInput.focus();
+    return false;
+  }
+
+  return true;
+}
+
 export function validatePassword(password) {
   const RegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 

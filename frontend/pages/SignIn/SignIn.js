@@ -11,7 +11,8 @@ import {
   validateName,
   validatePasswordConfirm,
   validatePassword,
-  qs
+  qs,
+  validateEmailVerified
 } from "../../utils/index.js";
 import style from "./signIn.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -92,15 +93,16 @@ export class SignIn extends Component {
 
   handleSignIn(e) {
     e.preventDefault();
-    if (!this.state.isEmailConfirmVerified) {
-      new Toast("이메일을 인증해주세요.");
-    }
+
     if (
+      validateName(qs("#name")) &&
       validateEmail(qs("#email")) &&
       validatePassword(qs("#password")) &&
       validatePasswordConfirm(qs("#password"), qs("#passwordConfirm")) &&
-      validateName(qs("#name")) &&
-      this.state.isEmailConfirmVerified
+      validateEmailVerified(
+        this.state.isEmailConfirmVerified,
+        qs("#emailConfirm")
+      )
     ) {
       postSignIn(Form.getFormData());
     }
@@ -108,12 +110,14 @@ export class SignIn extends Component {
 
   async handleEmailConfirmSend(e) {
     e.preventDefault();
-    const email = qs('[name="email"]');
-    const response = await postEmailConfirmSend(email.value);
-    if (response.message === "fail") {
-      new Toast("이미 가입된 이메일입니다.");
-    } else {
-      new Toast("인증코드가 이메일로 발송되었습니다.");
+    if (validateEmail(qs("#email"))) {
+      const email = qs('[name="email"]');
+      const response = await postEmailConfirmSend(email.value);
+      if (response.message === "fail") {
+        new Toast("이미 가입된 이메일입니다.");
+      } else {
+        new Toast("인증코드가 이메일로 발송되었습니다.");
+      }
     }
   }
 
