@@ -1,9 +1,9 @@
 import Form from "../Form/Form.js";
 import Component from "../../core/Component.js";
 import {
-  detailAddressValidation,
-  nameValidation,
-  phoneValidation,
+  validateDetailAddress,
+  validateName,
+  validatePhone,
   qs
 } from "../../utils/index.js";
 import { getOrderInfo, putOrderInfo } from "../../apis/index.js";
@@ -58,9 +58,9 @@ class OrderEdit extends Component {
   handleEditBtn(e) {
     e.preventDefault();
     if (
-      nameValidation(qs("#orderName")) &&
-      phoneValidation(qs("#orderPhone")) &&
-      detailAddressValidation(qs("#detailAddress"))
+      validateName(qs("#orderName")) &&
+      validatePhone(qs("#orderPhone")) &&
+      validateDetailAddress(qs("#detailAddress"))
     ) {
       putOrderInfo(Form.getFormData(), this.props);
     }

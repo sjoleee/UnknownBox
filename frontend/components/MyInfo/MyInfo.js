@@ -2,9 +2,9 @@ import { putMyPassword } from "../../apis/index.js";
 import Component from "../../core/Component.js";
 import {
   MODAL,
-  newPasswordValidation,
-  passwordConfirmValidation,
-  passwordValidation,
+  validateNewPassword,
+  validatePasswordConfirm,
+  validatePassword,
   qs
 } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
@@ -89,9 +89,9 @@ class MyInfo extends Component {
     const password = qs('[name="newPassword"]');
     const passwordConfirm = qs('[name="newPasswordConfirm"]');
     if (
-      newPasswordValidation(pastPassword, password) &&
-      passwordValidation(password) &&
-      passwordConfirmValidation(password, passwordConfirm)
+      validateNewPassword(pastPassword, password) &&
+      validatePassword(password) &&
+      validatePasswordConfirm(password, passwordConfirm)
     ) {
       const response = await putMyPassword(formData);
       new Toast(response.message);

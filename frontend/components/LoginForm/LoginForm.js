@@ -1,6 +1,6 @@
 import { postLogin } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { emailValidation, passwordValidation, qs } from "../../utils/index.js";
+import { validateEmail, validatePassword, qs } from "../../utils/index.js";
 
 class LoginForm extends Component {
   template() {
@@ -45,7 +45,7 @@ class LoginForm extends Component {
     e.preventDefault();
     const [email, password] = Array.from(e.target).map(item => item.value);
 
-    if (emailValidation(email) && passwordValidation(password)) {
+    if (validateEmail(email) && validatePassword(password)) {
       const loginData = {
         email,
         password
