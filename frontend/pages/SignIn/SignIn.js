@@ -28,6 +28,10 @@ export class SignIn extends Component {
             `;
   }
 
+  setup() {
+    this.state = { isEmailConfirmVerified: false };
+  }
+
   mounted() {
     const formChildren = [
       {
@@ -88,12 +92,15 @@ export class SignIn extends Component {
 
   handleSignIn(e) {
     e.preventDefault();
-
+    if (!this.state.isEmailConfirmVerified) {
+      new Toast("이메일을 인증해주세요.");
+    }
     if (
       emailValidation(qs("#email")) &&
       passwordValidation(qs("#password")) &&
       passwordConfirmValidation(qs("#password"), qs("#passwordConfirm")) &&
-      nameValidation(qs("#name"))
+      nameValidation(qs("#name")) &&
+      this.state.isEmailConfirmVerified
     ) {
       postSignIn(Form.getFormData());
     }
@@ -122,6 +129,7 @@ export class SignIn extends Component {
       new Toast("인증코드가 잘못되었습니다.");
     } else {
       new Toast("인증되었습니다.");
+      this.setState({ isEmailConfirmVerified: true });
       email.setAttribute("readonly", true);
       emailConfirm.disabled = true;
       qs(".form-emailConfirmVerified-btn").disabled = true;
