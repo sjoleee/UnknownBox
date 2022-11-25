@@ -1,9 +1,9 @@
 import Component from "../../core/Component.js";
 import PaymentInfo from "../../components/PaymentInfo/PaymentInfo.js";
 import {
-  detailAddressValidation,
-  nameValidation,
-  phoneValidation,
+  validateDetailAddress,
+  validateName,
+  validatePhone,
   qs,
   qsAll
 } from "../../utils/index.js";
@@ -104,9 +104,9 @@ export class Payment extends Component {
   async handleEditBtn(event, products) {
     event.preventDefault();
     if (
-      nameValidation(qs("#orderName")) &&
-      phoneValidation(qs("#orderPhone")) &&
-      detailAddressValidation(qs("#detailAddress"))
+      validateName(qs("#orderName")) &&
+      validatePhone(qs("#orderPhone")) &&
+      validateDetailAddress(qs("#detailAddress"))
     ) {
       await postPayment(Form.getFormData(), products);
 
