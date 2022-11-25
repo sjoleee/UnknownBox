@@ -54,7 +54,7 @@ export function createEditForm(elementList) {
   );
 }
 
-export function emailValidation(email) {
+export function validateEmail(email) {
   const RegExp =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -72,7 +72,7 @@ export function emailValidation(email) {
   return true;
 }
 
-export function passwordValidation(password) {
+export function validatePassword(password) {
   const RegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 
   if (!password.value) {
@@ -89,7 +89,7 @@ export function passwordValidation(password) {
   return true;
 }
 
-export function newPasswordValidation(password, newPassword) {
+export function validateNewPassword(password, newPassword) {
   if (password.value === newPassword.value) {
     new Toast("현재 비밀번호와 다른 비밀번호를 입력해주세요.");
     newPassword.focus();
@@ -99,7 +99,7 @@ export function newPasswordValidation(password, newPassword) {
   return true;
 }
 
-export function passwordConfirmValidation(password, passwordConfirm) {
+export function validatePasswordConfirm(password, passwordConfirm) {
   if (!passwordConfirm.value) {
     new Toast("비밀번호 확인을 입력해주세요.");
     passwordConfirm.focus();
@@ -114,7 +114,7 @@ export function passwordConfirmValidation(password, passwordConfirm) {
   return true;
 }
 
-export function nameValidation(name) {
+export function validateName(name) {
   const RegExp = /^[가-힣]{2,15}$/;
 
   if (!name.value) {
@@ -131,7 +131,7 @@ export function nameValidation(name) {
   return true;
 }
 
-export function phoneValidation(phone) {
+export function validatePhone(phone) {
   const RegExp = /^010[1-9][0-9]{3}[0-9]{4}$/;
 
   if (!phone.value) {
@@ -148,7 +148,7 @@ export function phoneValidation(phone) {
   return true;
 }
 
-export function detailAddressValidation(detailAddress) {
+export function validateDetailAddress(detailAddress) {
   if (!detailAddress.value) {
     new Toast("상세주소를 입력해주세요.");
     detailAddress.focus();

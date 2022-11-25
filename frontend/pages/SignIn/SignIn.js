@@ -7,10 +7,10 @@ import Form from "../../components/Form/Form.js";
 import Toast from "../../components/Toast/Toast.js";
 import Component from "../../core/Component.js";
 import {
-  emailValidation,
-  nameValidation,
-  passwordConfirmValidation,
-  passwordValidation,
+  validateEmail,
+  validateName,
+  validatePasswordConfirm,
+  validatePassword,
   qs
 } from "../../utils/index.js";
 import style from "./signIn.css" assert { type: "css" };
@@ -96,10 +96,10 @@ export class SignIn extends Component {
       new Toast("이메일을 인증해주세요.");
     }
     if (
-      emailValidation(qs("#email")) &&
-      passwordValidation(qs("#password")) &&
-      passwordConfirmValidation(qs("#password"), qs("#passwordConfirm")) &&
-      nameValidation(qs("#name")) &&
+      validateEmail(qs("#email")) &&
+      validatePassword(qs("#password")) &&
+      validatePasswordConfirm(qs("#password"), qs("#passwordConfirm")) &&
+      validateName(qs("#name")) &&
       this.state.isEmailConfirmVerified
     ) {
       postSignIn(Form.getFormData());
